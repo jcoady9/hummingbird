@@ -14,7 +14,4 @@ namespace :test do
   end
 end
 
-Rake::Task[:test].enhance do
-  Rake::Task["test:lib"].invoke
-  Rake::Task["test:services"].invoke
-end
+Rake::Task['test:run'].enhance ['test:lib', 'test:services']
