@@ -26,13 +26,13 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 end
 
-require_dependency 'auth/current_user_provider'
+require_dependency 'auth/provider'
 
 class ActionController::TestCase
   include Devise::TestHelpers
 
   def sign_in(user)
-    @controller.env["_CURRENT_USER"] = user
+    @controller.env[Auth::Provider::MASQUERADE] = user.id
   end
 
   def assert_preloaded(key)
